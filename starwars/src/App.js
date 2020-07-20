@@ -14,9 +14,7 @@ import './App.css';
 
 const App = () => {
   const [listOfCharacters, setlistOfCharacters] = useState([])
-  const [currentFriendId, setCurrentFriendId] = useState(null)
-
-
+  let x = 0
 useEffect(() => {
   axios.get('http://swapi.dev/api/people/')
   .then(res=>{
@@ -30,8 +28,15 @@ useEffect(() => {
 
   return (
     <div className="App">
-      <h1 className="Header">Characters</h1>
-      <Character listOfCharacters={listOfCharacters}/>
+      <img src={require("./images/logo.png")}></img><h1 className="Header">Characters</h1>
+        {
+          listOfCharacters.map( character => {
+            character.id = x
+            x++
+            return <Character character={character} key={character.id}/>
+          })
+        }
+      
     </div>
   );
 }
